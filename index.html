@@ -10,7 +10,7 @@
 </head>
 <body>
 
-  <!-- 顶部固定栏（保留） -->
+  <!-- 顶部栏 -->
   <header class="topbar">
     <div class="brand">Time Capsule</div>
     <div class="controls">
@@ -19,42 +19,41 @@
     </div>
   </header>
 
-  <!-- Page 1：Five Secret Stories About Me → gallery.html -->
+  <!-- Page 1 -->
   <section class="scene" id="p1">
-    <img class="bg" src="assets/bg1.JPG" alt="">
-    <div class="text center">
+    <img class="bg" src="assets/bg1.JPG" alt="Cover">
+    <div class="text">
       <h1 class="title">Five Secret Stories About Me</h1>
       <p>Five small things, five big memories.</p>
       <button class="btn btn-large" onclick="location.href='gallery.html'">Begin</button>
     </div>
   </section>
-  
+
+  <!-- Page 2 -->
   <section class="scene" id="p2">
-    <img class="bg" src="assets/capsule_final.jpg" alt="">
-    <div class="text center">
+    <img class="bg" src="assets/capsule_final.jpg" alt="My Time Capsule">
+    <div class="text">
       <h2 class="title">My Time Capsule</h2>
       <p>A container of ordinary things that carry my time.</p>
       <button class="btn btn-large" onclick="location.href='my-time-capsule.html'">View Capsule</button>
     </div>
   </section>
-  
+
+  <!-- Page 3 -->
   <section class="scene" id="p3">
-    <img class="bg" src="assets/future_bg.jpg" alt="">
-    <div class="text center">
+    <img class="bg" src="assets/future_bg.jpg" alt="Future Capsule">
+    <div class="text">
       <h2 class="title">Future Capsule</h2>
       <p>125 years later… what will they think?</p>
       <button class="btn btn-large" onclick="location.href='future.html'">Tell the Future Story</button>
     </div>
   </section>
-  
 
-  <!-- 环境音（可留） -->
+  <!-- 可选音频（保留也不影响） -->
   <audio id="ambient" src="assets/ambient.mp3" loop></audio>
   <audio id="voiceover" preload="auto"></audio>
 
-  <!-- （可留）动画库 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="script.js"></script>
+  <!-- 如需你的动画脚本，可保留这行；如果之前脚本会影响布局，可暂时注释掉 -->
+  <!-- <script src="script.js"></script> -->
 </body>
 </html>

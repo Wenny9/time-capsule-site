@@ -4,56 +4,61 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>My Time Capsule Story</title>
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- 顶部栏 -->
+  <!-- Top bar （保留你原来的按钮与进度条即可） -->
   <header class="topbar">
     <div class="brand">Time Capsule</div>
     <div class="controls">
-      <button id="audio-toggle" class="btn">Enable Audio</button>
+      <button id="audio-toggle" class="btn btn-ghost">Enable Audio</button>
       <div class="progress"><span id="progress-bar"></span></div>
     </div>
   </header>
 
-  <!-- Page 1 -->
-  <section class="scene" id="p1">
-    <img class="bg" src="assets/bg1.JPG" alt="Cover">
-    <div class="text">
-      <h1 class="title">Five Secret Stories About Me</h1>
-      <p>Five small things, five big memories.</p>
+  <!-- Hero 1 -->
+  <section class="scene" id="p1" aria-label="Five Secret Stories About Me">
+    <img class="bg" src="assets/bg1.JPG" alt="">
+    <div class="hero-inner">
+      <h1 class="hero-title">Five Secret Stories About Me</h1>
+      <p class="hero-sub">Five small things, five big memories.</p>
       <button class="btn btn-large" onclick="location.href='gallery.html'">Begin</button>
     </div>
   </section>
 
-  <!-- Page 2 -->
-  <section class="scene" id="p2">
-    <img class="bg" src="assets/capsule_final.jpg" alt="My Time Capsule">
-    <div class="text">
-      <h2 class="title">My Time Capsule</h2>
-      <p>A container of ordinary things that carry my time.</p>
+  <!-- Hero 2 -->
+  <section class="scene" id="p2" aria-label="My Time Capsule">
+    <img class="bg" src="assets/capsule_final.jpg" alt="">
+    <div class="hero-inner">
+      <h2 class="hero-title">My Time Capsule</h2>
+      <p class="hero-sub">A container of ordinary things that carry my time.</p>
       <button class="btn btn-large" onclick="location.href='my-time-capsule.html'">View Capsule</button>
     </div>
   </section>
 
-  <!-- Page 3 -->
-  <section class="scene" id="p3">
-    <img class="bg" src="assets/future_bg.jpg" alt="Future Capsule">
-    <div class="text">
-      <h2 class="title">Future Capsule</h2>
-      <p>125 years later… what will they think?</p>
+  <!-- Hero 3 -->
+  <section class="scene" id="p3" aria-label="Future Capsule">
+    <img class="bg" src="assets/future_bg.jpg" alt="">
+    <div class="hero-inner">
+      <h2 class="hero-title">Future Capsule</h2>
+      <p class="hero-sub">125 years later… what will they think?</p>
       <button class="btn btn-large" onclick="location.href='future.html'">Tell the Future Story</button>
     </div>
   </section>
 
-  <!-- 可选音频（保留也不影响） -->
+  <!-- optional: keep your audio & gsap -->
   <audio id="ambient" src="assets/ambient.mp3" loop></audio>
   <audio id="voiceover" preload="auto"></audio>
 
-  <!-- 如需你的动画脚本，可保留这行；如果之前脚本会影响布局，可暂时注释掉 -->
-  <!-- <script src="script.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

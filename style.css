@@ -1,109 +1,99 @@
-/* ============ Base Reset ============ */
-* { box-sizing: border-box; margin: 0; }
-html, body { height: 100%; background: #0b0b0c; color: #f4f4f4; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+/* ========= Base ========= */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  color: #fff;
+  background: #000;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
 
-/* ============ Topbar ============ */
+/* Topbar */
 .topbar{
   position: fixed; inset: 0 0 auto 0; height: 56px;
   display:flex; align-items:center; justify-content:space-between;
-  padding: 0 16px;
-  background: linear-gradient(to bottom, rgba(10,10,12,.65), rgba(10,10,12,.1));
+  padding: 0 16px; z-index: 1000;
+  background: linear-gradient(to bottom, rgba(10,10,12,.65), rgba(10,10,12,.10));
   backdrop-filter: blur(6px);
-  z-index: 1000;
 }
-.brand{ font-weight:700; letter-spacing:.4px; }
+.brand{ font-weight:600; letter-spacing:.3px; }
 .controls{ display:flex; align-items:center; gap:12px; }
-.btn{
-  padding: 8px 14px; border: 1px solid #fff; border-radius: 999px;
-  background: transparent; color: #fff; cursor: pointer;
-}
-.btn:hover{ background: rgba(255,255,255,.12); }
-.progress{ width:160px; height:4px; background: rgba(255,255,255,.15); border-radius:999px; overflow:hidden; }
+.progress{ width:160px; height:4px; background:rgba(255,255,255,.18); border-radius:999px; overflow:hidden; }
 #progress-bar{ display:block; height:100%; width:0%; background:#76e8ff; }
 
-/* ============ Hero Sections (p1/p2/p3) ============ */
-/* 每屏独立，占满视口高度，不让上一屏的背景“溢出” */
+/* Buttons */
+.btn{
+  border:1px solid #fff; color:#fff; background:transparent;
+  border-radius:999px; padding:8px 14px; cursor:pointer;
+}
+.btn-ghost{ border-color:rgba(255,255,255,.6); background:rgba(0,0,0,.25); }
+.btn-large{
+  font-size:1.05rem; padding:12px 28px; border-width:1.6px;
+  background: rgba(255,255,255,.12);
+  box-shadow: 0 8px 24px rgba(0,0,0,.25);
+  backdrop-filter: blur(6px);
+  transition: background .2s ease, transform .15s ease;
+}
+.btn-large:hover{ background: rgba(255,255,255,.22); transform: translateY(-1px); }
+
+/* ========= Hero sections (the fix) ========= */
+
+/* 每屏高度：使用 svh 适配移动端地址栏变化 */
 .scene{
   position: relative;
-  min-height: 100svh; /* 更稳的移动端视口单位 */
+  min-height: 100svh;          /* <- 关键：稳定每屏高度 */
+  display: grid;               /* 用 Grid 居中，不用 absolute */
+  place-items: center;
   overflow: hidden;
-  padding-top: 56px; /* 顶栏高度，避免刘海遮住内容 */
 }
 
-/* 背景图始终在底层，铺满裁切 */
+/* 背景图永远在底层，铺满 */
 .scene .bg{
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
   z-index: 0;
-  filter: brightness(.78);
+  filter: brightness(.78);     /* 轻微压暗，保证文字对比 */
+  transform: none;
 }
 
-/* 中央文案盒：绝对居中，盖在背景之上 */
-.scene .text{
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(90vw, 780px);
+/* 柔和的暗角遮罩（可调） */
+.scene::after{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(120% 85% at 50% 30%, rgba(0,0,0,.15), rgba(0,0,0,.45));
+  z-index: 1; pointer-events: none;
+}
+
+/* 文字容器：自然居中，不重叠 */
+.hero-inner{
+  position: relative; z-index: 2;     /* 永远在背景与遮罩之上 */
   text-align: center;
-  z-index: 2;
-  /* 让文本不被意外动画隐藏 */
-  opacity: 1;
+  width: min(90vw, 780px);
+  padding: 0 12px;
 }
 
-/* 标题与段落（p1略大，p2/p3次一号） */
-#p1 .title{
+/* 统一的标题与副标题尺寸（p1 更大） */
+#p1 .hero-title{
   font-family: "Playfair Display", serif;
   font-size: clamp(28px, 5vw, 56px);
-  line-height: 1.15;
-  margin: 0 0 .6rem;
-  color: #fff;
+  line-height: 1.15; margin: 0 0 .6rem;
 }
-#p2 .title, #p3 .title{
+#p2 .hero-title, #p3 .hero-title{
   font-family: "Playfair Display", serif;
   font-size: clamp(24px, 4.2vw, 44px);
-  line-height: 1.18;
-  margin: 0 0 .6rem;
-  color: #fff;
+  line-height: 1.18; margin: 0 0 .6rem;
 }
-#p1 .text p, #p2 .text p, #p3 .text p{
+.hero-sub{
   margin: 0 auto 1.2rem;
   color: rgba(255,255,255,.92);
   font-size: clamp(14px, 1.7vw, 18px);
 }
 
-/* CTA 按钮（统一风格） */
-.btn.btn-large{
-  font-size: 1.05rem;
-  padding: 12px 28px;
-  border-radius: 999px;
-  border: 1.6px solid #fff;
-  color: #fff;
-  background: rgba(255,255,255,.12);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 8px 24px rgba(0,0,0,.25);
-  transition: background .2s ease, transform .15s ease;
-}
-.btn.btn-large:hover{ background: rgba(255,255,255,.22); transform: translateY(-1px); }
-.btn.btn-large:active{ transform: translateY(0); }
+/* 让内容不会被顶部栏遮住（大屏基本无感，小屏更安全） */
+.scene .hero-inner{ margin-top: 28px; }
 
-/* ============ Responsive Tweaks ============ */
 @media (max-width: 768px){
-  .scene{ padding-top: 56px; }
-  #p1 .title{ font-size: clamp(26px, 7vw, 44px); }
-  #p2 .title, #p3 .title{ font-size: clamp(22px, 6vw, 36px); }
-  #p1 .text p, #p2 .text p, #p3 .text p{ font-size: clamp(13px, 3.8vw, 16px); }
-}
-
-/* ============ Safety: 防止其它旧样式或脚本影响三屏 ============ */
-/* 明确层级：背景(0) < 文案(2) < 顶栏(1000) */
-#p1 .bg, #p2 .bg, #p3 .bg{ z-index: 0 !important; }
-#p1 .text, #p2 .text, #p3 .text{ z-index: 2 !important; }
-.topbar{ z-index: 1000 !important; }
-
-/* 禁止任何全局规则把三屏的文本初始设为透明或位移 */
-#p1 .text, #p2 .text, #p3 .text,
-#p1 .title, #p2 .title, #p3 .title{
-  opacity: 1 !important;
-  transform: translate(-50%, -50%) !important;
+  .topbar{ height: 52px; }
+  .scene .hero-inner{ margin-top: 24px; }
 }

@@ -1,4 +1,4 @@
-/* ===== 基础 ===== */
+/* 基础重置与排版 */
 * { box-sizing: border-box; margin: 0; }
 html, body { height: 100%; background: #0b0b0c; color: #f4f4f4; font-family: Inter, system-ui, Arial, sans-serif; }
 
@@ -12,211 +12,84 @@ html, body { height: 100%; background: #0b0b0c; color: #f4f4f4; font-family: Int
 }
 .brand { font-weight: 700; letter-spacing: .4px; }
 .controls { display: flex; align-items: center; gap: 12px; }
-.progress { width: 160px; height: 4px; background: rgba(255,255,255,0.15); border-radius: 999px; overflow: hidden; }
-#progress-bar { height: 100%; width: 0%; background: #76e8ff; display: block; }
-
-.btn { padding: 10px 16px; border: 1px solid #fff; background: transparent; color: #fff; border-radius: 999px; cursor: pointer; transition: .25s; }
+.btn { margin-top: 0; padding: 8px 14px; border: 1px solid #fff; background: transparent; color: #fff; border-radius: 999px; cursor: pointer; }
 .btn:hover { background: rgba(255,255,255,0.12); }
-.btn-large { font-size: 1.15rem; padding: 14px 28px; }
+.btn-ghost { padding: 6px 12px; border: 1px solid #fff; border-radius: 999px; text-decoration: none; color: #fff; }
 
-/* ===== 首页三屏 ===== */
-.scene { position: relative; min-height: 100vh; overflow: hidden; }
-.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.85); }
-.text { position: absolute; left: 8vw; bottom: 12vh; max-width: 620px; }
-.title { font-family: "Playfair Display", serif; margin-bottom: 12px; }
+/* 顶部进度条 */
+.progress { width: 160px; height: 4px; background: rgba(255,255,255,0.15); border-radius: 999px; overflow: hidden; }
+#progress-bar { display: block; height: 100%; width: 0%; background: #76e8ff; }
 
-#p1 .bg { filter: brightness(.9); }
-
-/* 封面“按钮在正中央” */
-.center.hero {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  text-align: center; max-width: 720px;
+/* 场景页 */
+section.scene { position: relative; height: 100vh; overflow: hidden; }
+.bg {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; filter: brightness(0.8); transform: scale(1.05);
 }
-.center.hero .title { font-size: clamp(1.6rem, 3vw, 2.4rem); margin-bottom: 8px; }
+.text { position: absolute; left: 8vw; bottom: 12vh; max-width: 620px; }
+h1, h2 { margin-bottom: 12px; font-family: "Playfair Display", serif; letter-spacing: .3px; }
+p { line-height: 1.75; opacity: 0.92; }
+.title { opacity: 0; transform: translateY(16px); } /* 供 GSAP 使用 */
 
-/* ===== Gallery 页（桌面端布局）===== */
-/* —— Gallery 背景（修正不显示） —— */
-body.gallery-page{
-    /* 轻微压暗 + 背景图；注意文件名大小写要与仓库一致 */
-    background-image:
-      linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.25)),
-      url("assets/bg12.JPG");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    color: #fff;
-    text-align: center;
-    /* 整体上移、底部留白（避免第二排贴底） */
-    padding-top: 36px;
-    padding-bottom: 96px;
-  }
-  
-  /* 标题区紧凑一点 */
-  .gallery-header h1 { font-family: "Playfair Display", serif; margin-top: 20px; margin-bottom: 8px; }
-  .gallery-header p  { opacity: .85; margin-bottom: 24px; }
-  
-  /* —— 固定成 “第一排3个 + 第二排2个” 居中 —— */
-  .gallery-grid{
-    display: grid;
-    grid-template-columns: repeat(3, 300px); /* 第一排3列 */
-    justify-content: center;                 /* 所有列居中 */
-    column-gap: 64px;                        /* 列间距 */
-    row-gap: 40px;                           /* 行间距 */
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto 60px;
-  }
-  
-  /* 每个 item 固定宽度，便于整齐 */
-  .gallery-grid .item{ width: 300px; margin: 0 auto; transition: transform .25s; cursor: pointer; }
-  .gallery-grid .item:hover{ transform: translateY(-6px); }
-  
-  /* —— 相片盒：透明底、不裁图 —— */
-  .gallery-grid .item .photo{
-    width: 100%;
-    aspect-ratio: 4 / 3;                     /* 统一比例，避免高度乱 */
-    display: flex; align-items: center; justify-content: center;
-    background: transparent;                 /* 透明PNG的“衬底”=透明 */
-    border-radius: 12px; overflow: hidden;
-  }
-  .gallery-grid .item .photo img{
-    max-width: 100%; max-height: 100%;
-    object-fit: contain;                     /* 不裁剪 */
-    image-rendering: auto;
-  }
-  
-  /* —— 去掉半透明黑条，改圆润童趣字体 —— */
-  .gallery-grid .item .label{
-    position: static;                        /* 不盖在图上 */
-    display: block;
-    margin-top: 10px;
-    padding: 0;
-    background: transparent;                 /* 去掉半透明黑框 */
-    color: #fff;
-    font-family: "Baloo 2", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-    font-weight: 600;
-    letter-spacing: .2px;
-    text-shadow: 0 1px 2px rgba(0,0,0,.45);  /* 让字在彩色背景上更清楚 */
-    border-radius: 0;
-  }
-  
-  /* 兜底：覆盖之前可能遗留的绝对定位/背景 */
-  .item span{ position: static !important; background: transparent !important; }
-  
+.center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
+.btn-large { font-size: 1.2rem; padding: 14px 28px; margin-top: 20px; border-radius: 999px; border: 1px solid #fff; background: transparent; color: #fff; transition: .3s; }
+.btn-large:hover { background: rgba(255,255,255,0.15); }
 
-/* 弹窗视频（桌面尺寸） */
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,.85); display: none; align-items:center; justify-content:center; z-index: 100; }
-.modal:not(.hidden) { display: flex; }
-.modal-content { position: relative; width: min(90vw, 960px); max-height: 85vh; }
-.modal-content video { display:block; width:100%; max-height:85vh; background:#000; border-radius:12px; box-shadow: 0 20px 60px rgba(0,0,0,.6); }
-#closeModal { position: absolute; top: -12px; right: -12px; width: 36px; height: 36px; border: none; border-radius: 50%; background: #fff; color: #000; font-size: 20px; cursor: pointer; }
+/* 简单页（my-time-capsule / future 当时的简版） */
+.simple-page { padding-top: 72px; }
+.simple-wrap { width: min(1100px, 90vw); margin: 0 auto 64px; text-align: center; }
+.simple-hero { width: 100%; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,.35); margin-top: 16px; }
 
-/* ---------- My Time Capsule (scroll page) ---------- */
-.capsule-page{
-    color:#fff; background:#000; overflow-x:hidden;
-    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  }
-  
-  /* 每个区块都占满一屏，居中排版 */
-  .capsule-section{
-    min-height:100vh;
-    position:relative;
-    display:grid;
-    place-items:center;
-    padding:3.2rem 1.2rem;
-  }
-  
-  /* 1) 黑底文本块 */
-  .concept{ background:#000; }
-  .concept-panel{
-    max-width: 960px;
-    background: rgba(0,0,0,.82);
-    border: 1px solid rgba(255,255,255,.08);
-    border-radius: 18px;
-    padding: clamp(1.4rem, 3vw, 2.2rem);
-    box-shadow: 0 10px 40px rgba(0,0,0,.45);
-  }
-  .capsule-title{
-    font-family:"Playfair Display", Georgia, serif;
-    font-size: clamp(1.6rem, 2.8vw, 2.4rem);
-    margin: 0 0 .8rem;
-    letter-spacing:.4px;
-  }
-  .capsule-intro{
-    line-height:1.85;
-    color:#ececec;
-    font-size: clamp(.98rem, 1.6vw, 1.08rem);
-    margin:.5rem 0;
-  }
-  
-  /* 2 & 4) 全屏背景区（概念/成品） */
-  .hero-image,
-  .final{
-    --bg:none;
-    background:
-      radial-gradient(transparent, rgba(0,0,0,.28)),
-      var(--bg) center/cover no-repeat fixed;
-  }
-  
-  /* 小的角标/说明牌 */
-  .img-credit,
-  .final-overlay{
-    position:absolute;
-    right:1rem; bottom:1rem;
-    background:rgba(0,0,0,.45);
-    padding:.6rem .9rem;
-    border-radius:10px;
-    font-size:.9rem;
-    box-shadow:0 8px 24px rgba(0,0,0,.35);
-  }
-  .final-title{
-    margin:0 0 .3rem;
-    font-size: clamp(1.2rem, 2.2vw, 1.8rem);
-    font-family:"Playfair Display", serif;
-  }
-  .caption{ color:#eee; }
-  
-  /* 3) 制作过程图 */
-  .process{ background:#0c0c0c; text-align:center; }
-  .subhead{
-    font-size: clamp(1.2rem, 2.2vw, 1.8rem);
-    font-family:"Playfair Display", serif;
-    margin:0 0 .4rem;
-  }
-  .process-img{
-    width: min(1100px, 90vw);
-    display:block; margin: 1rem auto 0;
-    border-radius:14px;
-    box-shadow:0 20px 60px rgba(0,0,0,.45);
-  }
-  
-  /* 悬浮返回按钮（右下角） */
-  .back-floating{
-    position:fixed; right:16px; bottom:16px; z-index:10;
-  }
-  .btn-ghost{
-    display:inline-block;
-    padding:.6rem 1rem;
-    border-radius:999px;
-    border:1px solid rgba(255,255,255,.55);
-    color:#fff; text-decoration:none;
-    background:rgba(0,0,0,.35);
-    backdrop-filter: blur(6px);
-    transition:.25s ease;
-  }
-  .btn-ghost:hover{ transform: translateY(-2px); }
-  
-  /* 轻入场效果 */
-  .concept-panel, .process-img, .final-overlay{
-    opacity:0; transform: translateY(10px);
-    animation: fadeUp .8s ease .08s forwards;
-  }
-  @keyframes fadeUp{ to{ opacity:1; transform:none; } }
-  
-  /* 让全屏区块的背景图片真正铺满 */
-  .capsule-section.hero-image,
-  .capsule-section.final{
-    padding:0;    /* 纯视觉全屏 */
-  }
-  
+/* Gallery 页面 */
+body.gallery-page {
+  background-image:
+    linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.25)),
+    url("assets/bg12.JPG");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #fff;
+  padding-top: 72px;
+  text-align: center;
+}
+.gallery-header h1 { font-family: "Playfair Display", serif; margin: 8px 0 6px; }
+.gallery-header p { opacity: .85; margin-bottom: 32px; }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 28px;
+  width: min(1100px, 92vw);
+  margin: 0 auto 64px;
+}
+.item { position: relative; cursor: pointer; transition: transform .3s ease; }
+.item .photo {
+  width: 100%; aspect-ratio: 4 / 5;
+  display: grid; place-items: center;
+  background: transparent; border-radius: 12px; overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+.item img { width: 100%; height: 100%; object-fit: contain; }
+.item .label {
+  display: block; margin-top: 10px; font-weight: 600;
+}
+.item:hover { transform: translateY(-6px); }
+
+/* 弹窗视频 */
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,.85); display: flex; align-items: center; justify-content: center; z-index: 50; }
+.modal.hidden { display: none; }
+.modal-content { position: relative; width: min(90vw, 900px); max-height: 85vh; }
+.modal-content video { width: 100%; height: auto; max-height: 85vh; background: #000; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,.6); }
+#closeModal { position: absolute; top: -12px; right: -12px; background: #fff; color: #000; border: none; border-radius: 50%; font-size: 20px; width: 36px; height: 36px; cursor: pointer; }
+
+/* ------------ 兜底修复：确保 #p1/#p2/#p3 背景图一定显示 ------------ */
+/* 统一 .scene 的层叠：背景在最底，文本在上，渐变层可覆盖但不遮挡事件 */
+.scene { position: relative; min-height: 100vh; overflow: hidden; }
+.scene .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+.bg-grad-p2, .bg-grad-p3 {
+  position: absolute; inset: 0; z-index: 1;
+  /* 透明径向渐变，避免覆盖背景图 */
+  background: radial-gradient(120% 85% at 50% 30%, rgba(0,0,0,0) 0%, rgba(0,0,0,.35) 65%, rgba(0,0,0,.55) 100%);
+  pointer-events: none;
+}
+.scene .text { position: relative; z-index: 2; }

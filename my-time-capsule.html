@@ -5,58 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>My Time Capsule</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="capsule-page">
+<body class="simple-page">
 
-  <!-- 顶部栏（与首页风格一致） -->
   <header class="topbar">
     <div class="brand">Time Capsule</div>
-    <a class="btn-ghost" href="index.html">← Back</a>
+    <a class="btn btn-ghost" href="index.html">← Back</a>
   </header>
 
-  <!-- Section 1：设计理念（黑底文本块） -->
-  <section class="capsule-section concept">
-    <div class="concept-panel">
-      <h1 class="capsule-title">Design Concept</h1>
-      <p class="capsule-intro">
-        My time capsule is an abstract “bear silhouette” built from layered, translucent shells.
-        The form feels soft and protective, like memory itself — gentle, diffused, and never
-        perfectly sharp. The central cavity is left intentionally spacious, so that small
-        objects can be placed inside like a warm “glow” of time.
-      </p>
-      <p class="capsule-intro">
-        Materials are chosen for translucency and lightness (PP sheets or frosted acetate).
-        Each layer follows a simplified contour to create depth without heaviness.
-        When illuminated from within, the capsule turns memories into a quiet, warm halo.
-      </p>
-    </div>
-  </section>
+  <main class="simple-wrap">
+    <h1 class="title">My Time Capsule</h1>
+    <p>This page briefly introduces the capsule and links back to the main story.</p>
+    <img class="simple-hero" src="assets/capsule_final.jpg" alt="Capsule" />
+  </main>
 
-  <!-- Section 2：全屏概念大图（占满背景） -->
-  <section class="capsule-section hero-image" style="--bg: url('assets/capsule_bg.jpg')">
-    <div class="img-credit">Concept render / Mood visual</div>
-  </section>
-
-  <!-- Section 3：制作过程图 -->
-  <section class="capsule-section process">
-    <div>
-      <h2 class="subhead">Process</h2>
-      <p class="caption">Layer planning · material tests · assembly order</p>
-      <img class="process-img" src="assets/capsule_process.jpg" alt="Process photo">
-    </div>
-  </section>
-
-  <!-- Section 4：最终成品（全屏背景） -->
-  <section class="capsule-section final" style="--bg: url('assets/capsule_final.jpg')">
-    <div class="final-overlay">
-      <h3 class="final-title">Final Piece</h3>
-      <p class="caption">Layered translucent bear capsule · internal cavity for objects</p>
-    </div>
-  </section>
-
-  <!-- 右下角悬浮返回按钮 -->
-  <a class="back-floating btn-ghost" href="index.html">Back to Start</a>
 </body>
 </html>

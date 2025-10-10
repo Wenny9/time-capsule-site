@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Objects of Memory</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="gallery-page">
+
+  <div class="gallery-header">
+    <h1>Objects of Memory</h1>
+    <p>Click each item to watch its story.</p>
+  </div>
+
+  <div class="gallery-grid">
+    <div class="item" data-video="assets/Bear.mp4" role="button" tabindex="0" aria-label="Play Teddy bear story">
+      <div class="photo"><img src="assets/ob1.png" alt="Teddy bear"></div>
+      <span class="label">Teddy bear</span>
+    </div>
+
+    <div class="item" data-video="assets/Perfume.mp4" role="button" tabindex="0" aria-label="Play Perfume story">
+      <div class="photo"><img src="assets/ob2.png" alt="Perfume"></div>
+      <span class="label">Perfume</span>
+    </div>
+
+    <div class="item" data-video="assets/Bag.mp4" role="button" tabindex="0" aria-label="Play Lucky bag story">
+      <div class="photo"><img src="assets/ob3.png" alt="Lucky bag"></div>
+      <span class="label">Lucky bag</span>
+    </div>
+
+    <div class="item" data-video="assets/Bracelet.mp4" role="button" tabindex="0" aria-label="Play Bracelets story">
+      <div class="photo"><img src="assets/ob4.png" alt="Bracelets"></div>
+      <span class="label">Bracelets</span>
+    </div>
+
+    <div class="item" data-video="assets/Ring.mp4" role="button" tabindex="0" aria-label="Play Ring story">
+      <div class="photo"><img src="assets/ob5.png" alt="Ring"></div>
+      <span class="label">Ring</span>
+    </div>
+  </div>
+
+  <!-- 弹窗视频播放器 -->
+  <div id="videoModal" class="modal hidden" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-label="Story video">
+      <!-- 提前声明两种常见类型，提升兼容；真正的 src 由 JS 注入 -->
+      <video id="storyVideo" controls playsinline preload="metadata"></video>
+      <button id="closeModal" aria-label="Close video">×</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

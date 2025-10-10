@@ -35,46 +35,75 @@ html, body { height: 100%; background: #0b0b0c; color: #f4f4f4; font-family: Int
 .center.hero .title { font-size: clamp(1.6rem, 3vw, 2.4rem); margin-bottom: 8px; }
 
 /* ===== Gallery 页（桌面端布局）===== */
-body.gallery-page {
-  background-image:
-    linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.25)),
-    url("assets/bg12.JPG");
-  background-position: center; background-repeat: no-repeat; background-size: cover;
-  color:#fff; text-align:center; padding-top: 64px;
-}
-
-.gallery-header h1 { font-family: "Playfair Display", serif; margin-top: 32px; margin-bottom: 8px; }
-.gallery-header p { opacity: .85; margin-bottom: 28px; }
-
-/* 桌面端：固定 3 + 2 布局（不做手机适配） */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 260px);
-  justify-content: center;
-  gap: 28px 80px;
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto 70px;
-}
-.gallery-grid .item:nth-child(n+4) { grid-column: span 1; }
-
-/* 相片卡片：不裁剪原图 */
-.item { transition: transform .25s; cursor: pointer; }
-.item:hover { transform: translateY(-6px); }
-.item .photo {
-  width: 260px; height: 220px; margin: 0 auto;
-  display:flex; align-items:center; justify-content:center;
-  background: transparent; border-radius: 10px; overflow:hidden;
-}
-.item .photo img { max-width:100%; max-height:100%; object-fit: contain; }
-
-/* 去掉半透明黑条，换童趣字体 */
-.item .label {
-  display:block; margin-top: 10px; color:#fff;
-  font-family: "Baloo 2", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-  font-weight: 600; letter-spacing: .2px;
-  text-shadow: 0 1px 2px rgba(0,0,0,.45);
-}
+/* —— Gallery 背景（修正不显示） —— */
+body.gallery-page{
+    /* 轻微压暗 + 背景图；注意文件名大小写要与仓库一致 */
+    background-image:
+      linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.25)),
+      url("assets/bg12.JPG");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #fff;
+    text-align: center;
+    /* 整体上移、底部留白（避免第二排贴底） */
+    padding-top: 36px;
+    padding-bottom: 96px;
+  }
+  
+  /* 标题区紧凑一点 */
+  .gallery-header h1 { font-family: "Playfair Display", serif; margin-top: 20px; margin-bottom: 8px; }
+  .gallery-header p  { opacity: .85; margin-bottom: 24px; }
+  
+  /* —— 固定成 “第一排3个 + 第二排2个” 居中 —— */
+  .gallery-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 300px); /* 第一排3列 */
+    justify-content: center;                 /* 所有列居中 */
+    column-gap: 64px;                        /* 列间距 */
+    row-gap: 40px;                           /* 行间距 */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 60px;
+  }
+  
+  /* 每个 item 固定宽度，便于整齐 */
+  .gallery-grid .item{ width: 300px; margin: 0 auto; transition: transform .25s; cursor: pointer; }
+  .gallery-grid .item:hover{ transform: translateY(-6px); }
+  
+  /* —— 相片盒：透明底、不裁图 —— */
+  .gallery-grid .item .photo{
+    width: 100%;
+    aspect-ratio: 4 / 3;                     /* 统一比例，避免高度乱 */
+    display: flex; align-items: center; justify-content: center;
+    background: transparent;                 /* 透明PNG的“衬底”=透明 */
+    border-radius: 12px; overflow: hidden;
+  }
+  .gallery-grid .item .photo img{
+    max-width: 100%; max-height: 100%;
+    object-fit: contain;                     /* 不裁剪 */
+    image-rendering: auto;
+  }
+  
+  /* —— 去掉半透明黑条，改圆润童趣字体 —— */
+  .gallery-grid .item .label{
+    position: static;                        /* 不盖在图上 */
+    display: block;
+    margin-top: 10px;
+    padding: 0;
+    background: transparent;                 /* 去掉半透明黑框 */
+    color: #fff;
+    font-family: "Baloo 2", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+    font-weight: 600;
+    letter-spacing: .2px;
+    text-shadow: 0 1px 2px rgba(0,0,0,.45);  /* 让字在彩色背景上更清楚 */
+    border-radius: 0;
+  }
+  
+  /* 兜底：覆盖之前可能遗留的绝对定位/背景 */
+  .item span{ position: static !important; background: transparent !important; }
+  
 
 /* 弹窗视频（桌面尺寸） */
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,.85); display: none; align-items:center; justify-content:center; z-index: 100; }

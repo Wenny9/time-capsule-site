@@ -109,18 +109,22 @@ if (window.gsap && window.ScrollTrigger) {
     if (!cards.length || !modalEl || !videoEl || !closeEl) return;
   
     const openModal = (src) => {
-      videoEl.src = src;
-      modalEl.classList.remove('hidden');
-      // 用户点击触发，自动播放更稳
-      videoEl.play().catch(()=>{});
-    };
-  
-    const closeModal = () => {
-      try { videoEl.pause(); } catch {}
-      videoEl.removeAttribute('src');
-      videoEl.load();
-      modalEl.classList.add('hidden');
-    };
+        videoEl.src = src;
+        modalEl.classList.remove('hidden');
+        modalEl.classList.add('show');
+        document.body.style.overflow = 'hidden';
+        videoEl.play().catch(()=>{});
+      };
+      
+      const closeModal = () => {
+        try { videoEl.pause(); } catch {}
+        videoEl.removeAttribute('src');
+        videoEl.load();
+        modalEl.classList.remove('show');
+        modalEl.classList.add('hidden');
+        document.body.style.overflow = '';
+      };
+           
   
     cards.forEach(card => {
       card.addEventListener('click', () => {

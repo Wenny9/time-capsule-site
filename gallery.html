@@ -5,64 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Objects of Memory</title>
 
-  <!-- 童趣圆润字体 -->
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    /* ---- GALLERY 关键样式（先内联验证）---- */
-    body.gallery-page {
-      position: relative;
-      min-height: 100vh;
-      color: #fff;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      text-align: center;
-      padding-top: 60px;
-      background: #000;
-      overflow-x: hidden;
-    }
-    body.gallery-page::before {
-      content: "";
-      position: fixed; inset: 0;
-      background:
-        linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.25)),
-        url("assets/bg12.JPG") center/cover no-repeat;
-      filter: blur(4px) brightness(.8);
-      z-index: -1;
-    }
-    .gallery-header h1 {
-      font-family: "Playfair Display", serif;
-      font-size: clamp(24px, 4vw, 38px);
-      margin-bottom: .4rem;
-    }
-    .gallery-header p { opacity: .9; margin-bottom: 32px; }
-  
-    /* 关键：栅格容器 */
-    .gallery-grid {
-      display: flex; flex-wrap: wrap; justify-content: center;
-      gap: 28px; max-width: 1100px; margin: 0 auto 80px;
-    }
-    .item { width: 260px; text-align: center; transition: transform .3s ease; }
-    .item:hover { transform: translateY(-6px); }
-    .item .photo img { width: 100%; border-radius: 10px; display: block; object-fit: contain; }
-    .item .label {
-      display: block; margin-top: 10px; color: #fff;
-      font-family: "Baloo 2", Inter, sans-serif; font-weight: 600; letter-spacing: .3px;
-      text-shadow: 0 1px 3px rgba(0,0,0,.5);
-    }
-  
-    /* 弹窗样式 */
-    .modal { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,.6); z-index: 2000; }
-    .modal.hidden { display: none; }
-    .modal .modal-content {
-      position: relative; width: min(92vw, 960px); max-height: 88vh;
-      background: #000; border-radius: 12px; padding: 12px; box-shadow: 0 12px 40px rgba(0,0,0,.45);
-    }
-    .modal video { width: 100%; height: auto; display: block; border-radius: 8px; }
-    #closeModal {
-      position: absolute; top: 8px; right: 10px; width: 36px; height: 36px; border-radius: 50%;
-      border: 1px solid rgba(255,255,255,.5); background: rgba(0,0,0,.35); color: #fff;
-      font-size: 20px; line-heig
-  
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <!-- 强制加载最新样式（防缓存） -->
+  <link rel="stylesheet" href="style.css?v=20251011a" />
 </head>
 <body class="gallery-page">
 
@@ -71,43 +17,52 @@
     <p>Click each item to watch its story.</p>
   </header>
 
-  <!-- ✅ 缺失的栅格容器（非常关键） -->
+  <!-- 栅格容器 -->
   <div class="gallery-grid">
     <div class="item" data-video="assets/Bear.mp4">
-      <div class="photo"><img src="assets/ob1.png" alt="Teddy bear" loading="lazy"></div>
+      <div class="photo">
+        <img src="assets/ob1.png" alt="Teddy bear" loading="lazy">
+      </div>
       <span class="label">Teddy bear</span>
     </div>
 
     <div class="item" data-video="assets/Perfume.mp4">
-      <div class="photo"><img src="assets/ob2.png" alt="Perfume" loading="lazy"></div>
+      <div class="photo">
+        <img src="assets/ob2.png" alt="Perfume" loading="lazy">
+      </div>
       <span class="label">Perfume</span>
     </div>
 
     <div class="item" data-video="assets/Bag.mp4">
-      <div class="photo"><img src="assets/ob3.png" alt="Lucky bag" loading="lazy"></div>
+      <div class="photo">
+        <img src="assets/ob3.png" alt="Lucky bag" loading="lazy">
+      </div>
       <span class="label">Lucky bag</span>
     </div>
 
     <div class="item" data-video="assets/Bracelet.mp4">
-      <div class="photo"><img src="assets/ob4.png" alt="Bracelets" loading="lazy"></div>
+      <div class="photo">
+        <img src="assets/ob4.png" alt="Bracelets" loading="lazy">
+      </div>
       <span class="label">Bracelets</span>
     </div>
 
     <div class="item" data-video="assets/Ring.mp4">
-      <div class="photo"><img src="assets/ob5.png" alt="Ring" loading="lazy"></div>
+      <div class="photo">
+        <img src="assets/ob5.png" alt="Ring" loading="lazy">
+      </div>
       <span class="label">Ring</span>
     </div>
-  </div> <!-- /gallery-grid -->
+  </div><!-- /gallery-grid -->
 
-  <!-- 弹窗视频播放器 -->
-  <div id="videoModal" class="modal hidden" aria-hidden="true">
+  <!-- 弹窗视频播放器（默认隐藏） -->
+  <div id="videoModal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Story video modal">
     <div class="modal-content">
-      <!-- ✅ iOS/安卓内联播放，避免强制全屏 -->
       <video id="storyVideo" controls playsinline webkit-playsinline></video>
       <button id="closeModal" aria-label="Close">×</button>
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=20251011a"></script>
 </body>
 </html>

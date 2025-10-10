@@ -125,3 +125,77 @@ body {
   transition:background .2s, transform .15s;
 }
 .btn.btn-large:hover{background:rgba(255,255,255,.22);transform:translateY(-1px)}
+
+/* ===== GALLERY 修复 ===== */
+
+/* 整体背景：模糊背景图 + 柔光渐变 */
+body.gallery-page {
+    position: relative;
+    min-height: 100vh;
+    color: #fff;
+    font-family: "Inter", sans-serif;
+    text-align: center;
+    padding-top: 60px;
+    background: #000; /* 兜底色 */
+    overflow-x: hidden;
+  }
+  body.gallery-page::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
+      url("assets/bg12.JPG") center/cover no-repeat;
+    filter: blur(4px) brightness(0.8);
+    z-index: -1;
+  }
+  
+  /* 标题与说明 */
+  .gallery-header h1 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(24px, 4vw, 38px);
+    margin-bottom: 0.4rem;
+  }
+  .gallery-header p {
+    opacity: 0.9;
+    margin-bottom: 32px;
+  }
+  
+  /* 让卡片两行自动居中对齐：第一行 3 个，第二行 2 个 */
+  .gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 28px;
+    max-width: 1100px;
+    margin: 0 auto 80px;
+  }
+  
+  /* 相框大小与样式 */
+  .item {
+    width: 260px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  .item:hover {
+    transform: translateY(-6px);
+  }
+  .item img {
+    width: 100%;
+    border-radius: 10px;
+    display: block;
+    object-fit: contain;
+  }
+  
+  /* 移除半透明黑框，字体换成圆润童趣 */
+  .item span {
+    display: block;
+    margin-top: 10px;
+    background: transparent !important;
+    color: #fff;
+    font-family: "Baloo 2", "Inter", sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  }
+  

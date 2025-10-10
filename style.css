@@ -619,13 +619,82 @@ html {-webkit-text-size-adjust: 100%;}
     }
   }
   
-  /* 更小屏（<= 420px）时再收紧一点 */
-  @media (max-width: 420px) {
-    .item { width: min(92vw, 330px); }
-    .item .label { font-size: 1rem; }
+ /* ----------------- Mobile fixes (<=600px) ----------------- */
+@media (max-width: 600px) {
+    /* 1) 顶部和标题间距、字号 */
+    .topbar { height: 52px; }
+    .gallery-page { padding-top: 56px; padding-bottom: 56px; }
+    .gallery-header h1 {
+      font-size: clamp(20px, 6vw, 28px);
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+    .gallery-header p {
+      font-size: clamp(13px, 3.6vw, 16px);
+      margin-bottom: 18px;
+    }
+  
+    /* 2) Gallery 单列居中布局 */
+    .gallery-grid {
+      display: block;         /* 强制单列 */
+      width: 100%;
+      max-width: none;
+      margin: 0 auto;
+      padding: 0 14px;
+    }
+    .item {
+      width: 92vw;            /* 贴合屏幕宽 */
+      max-width: 560px;
+      margin: 0 auto 26px;    /* 卡片间距 */
+      transform: none !important;
+    }
+  
+    /* 3) 不裁切：让你的 PNG 相框完整显示 */
+    .item .photo {
+      width: 100%;
+      /* 你的物品照更接近 3:4，相框会完整显示；可按实际改 1/1、4/5 等 */
+      aspect-ratio: 3 / 4;
+      display: block;
+      background: transparent;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .item .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;    /* 关键：不裁切 */
+      image-rendering: auto;
+      filter: none;
+    }
+  
+    /* 4) 标签与字号 */
+    .item .label {
+      margin-top: 10px;
+      font-size: clamp(14px, 4.4vw, 18px);
+      text-shadow: 0 1px 2px rgba(0,0,0,.35);
+    }
+  
+    /* 5) 关掉 iOS 上的固定背景，避免错位和性能问题 */
+    body.gallery-page {
+      background-attachment: scroll; /* 覆盖 PC 的 fixed */
+      background-position: center top;
+    }
+  
+    /* 6) 首页/其它满屏背景在手机上更稳 */
+    .scene .bg {
+      transform: none;      /* 去掉轻微放大，避免小屏溢出 */
+      filter: brightness(.78);
+    }
+  
+    /* 7) 按钮尺寸 */
+    .btn, .btn-large {
+      font-size: clamp(14px, 4.2vw, 16px);
+      padding: 10px 18px;
+    }
+  
+    /* 8) Storyboard 与视频容器自适应 */
+    .storyboard-img { width: 94%; border-radius: 10px; }
+    .video-showcase video { width: 94%; max-width: 100%; }
   }
   
-  @media (max-width: 768px) {
-    #p1 .bg, #p2 .bg, #p3 .bg { transform: none; } /* 去掉额外缩放视差，减抖动 */
-  }
   

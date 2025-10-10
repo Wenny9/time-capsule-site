@@ -10,7 +10,7 @@
 </head>
 <body>
 
-  <!-- 顶部固定栏 -->
+  <!-- 顶部固定栏（保留） -->
   <header class="topbar">
     <div class="brand">Time Capsule</div>
     <div class="controls">
@@ -21,7 +21,7 @@
 
   <!-- Page 1：Five Secret Stories About Me → gallery.html -->
   <section class="scene" id="p1">
-    <img src="assets/bg1.JPG" class="bg" alt="Cover 1" />
+    <img src="assets/bg1.JPG" class="bg" alt="Cover 1">
     <div class="text center">
       <h1 class="title">Five Secret Stories About Me</h1>
       <p>Five small things, five big memories.</p>
@@ -31,7 +31,7 @@
 
   <!-- Page 2：My Time Capsule → my-time-capsule.html -->
   <section class="scene" id="p2">
-    <img class="bg" src="assets/capsule_final.jpg" alt="Time capsule hero">
+    <!-- 你可改成 <img class="bg" src="assets/bg_p2.jpg"> -->
     <div class="bg bg-grad-p2"></div>
     <div class="text center">
       <h2 class="title">My Time Capsule</h2>
@@ -42,7 +42,7 @@
 
   <!-- Page 3：Future Capsule → future.html -->
   <section class="scene" id="p3">
-    <img class="bg" src="assets/future_bg.jpg" alt="Future background">
+    <!-- 你可改成 <img class="bg" src="assets/bg_p3.jpg"> 或 <video class="bg" ...> -->
     <div class="bg bg-grad-p3"></div>
     <div class="text center">
       <h2 class="title">Future Capsule</h2>
@@ -51,14 +51,13 @@
     </div>
   </section>
 
-  <!-- 环境音与旁白（可用可不用） -->
+  <!-- 环境音（可留） -->
   <audio id="ambient" src="assets/ambient.mp3" loop></audio>
   <audio id="voiceover" preload="auto"></audio>
 
-  <!-- GSAP + ScrollTrigger -->
+  <!-- （可留）动画库 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
   <script src="script.js"></script>
 </body>
 </html>

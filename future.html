@@ -1,25 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Future Capsule</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="simple-page">
+<body class="future-page">
 
-  <header class="topbar">
-    <div class="brand">Time Capsule</div>
-    <a class="btn btn-ghost" href="index.html">← Back</a>
-  </header>
+  <!-- SECTION 1 – WORLDVIEW -->
+  <section class="scene future-world">
+    <div class="overlay">
+      <h1>Earth in 2150 – A Reconstructed World</h1>
+      <p>
+        By 2150, Earth has become a planet of shifting climates and hybrid life forms.<br>
+        Sea levels rose and coastal cities sank beneath golden dust. Humans evolved into bio-synthetic beings who collect artifacts to reconstruct emotion.<br>
+        Among ruins, one glowing bear capsule awakens — bridging past and future.
+      </p>
+    </div>
+  </section>
 
-  <main class="simple-wrap">
-    <h1 class="title">Future Capsule</h1>
-    <p>Fast forward 125 years: imagine how people would interpret your capsule.</p>
-    <img class="simple-hero" src="assets/future_bg.jpg" alt="Future image" />
-  </main>
+  <!-- SECTION 2 – STORYBOARD -->
+  <section class="scene storyboard">
+    <div class="storyboard-wrapper">
+      <h2 class="storyboard-title">Storyboard — The Memory Guardian Bear</h2>
+      <img src="assets/storyboard_lineart.png" alt="Storyboard of The Memory Guardian Bear" class="storyboard-img">
+    </div>
+  </section>
+  
 
+  <!-- SECTION 3 – ANIMATION VIDEO -->
+  <section class="scene video-showcase">
+    <video src="assets/memorybear_animation.mp4" controls autoplay muted loop></video>
+  </section>
+
+  <script src="script.js"></script>
 </body>
 </html>

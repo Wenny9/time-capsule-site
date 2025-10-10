@@ -1,30 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600&display=swap" rel="stylesheet">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Objects of Memory</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="gallery-page">
-
-  <header class="topbar">
-    <div class="brand">Time Capsule</div>
-    <a class="btn btn-ghost" href="index.html">← Back</a>
-  </header>
 
   <div class="gallery-header">
     <h1>Objects of Memory</h1>
     <p>Click each item to watch its story.</p>
   </div>
 
-  <div class="gallery-grid">
-    <div class="item" data-video="assets/Bear.mp4">
-      <div class="photo"><img src="assets/ob1.png" alt="Teddy bear"></div>
-      <span class="label">Teddy bear</span>
-    </div>
+  <div class="item" data-video="assets/Bear.mp4">
+    <div class="photo"><img src="assets/ob1.png" alt="Teddy bear"></div>
+    <span class="label">Teddy bear</span>
+  </div>  
     <div class="item" data-video="assets/Perfume.mp4">
       <div class="photo"><img src="assets/ob2.png" alt="Perfume"></div>
       <span class="label">Perfume</span>
@@ -42,11 +35,13 @@
       <span class="label">Ring</span>
     </div>
   </div>
+  
+  
 
   <!-- 弹窗视频播放器 -->
   <div id="videoModal" class="modal hidden">
     <div class="modal-content">
-      <video id="storyVideo" controls playsinline></video>
+      <video id="storyVideo" controls></video>
       <button id="closeModal">×</button>
     </div>
   </div>

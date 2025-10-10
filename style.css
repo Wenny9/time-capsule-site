@@ -111,3 +111,112 @@ body.gallery-page{
 .modal-content { position: relative; width: min(90vw, 960px); max-height: 85vh; }
 .modal-content video { display:block; width:100%; max-height:85vh; background:#000; border-radius:12px; box-shadow: 0 20px 60px rgba(0,0,0,.6); }
 #closeModal { position: absolute; top: -12px; right: -12px; width: 36px; height: 36px; border: none; border-radius: 50%; background: #fff; color: #000; font-size: 20px; cursor: pointer; }
+
+/* ---------- My Time Capsule (scroll page) ---------- */
+.capsule-page{
+    color:#fff; background:#000; overflow-x:hidden;
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  }
+  
+  /* 每个区块都占满一屏，居中排版 */
+  .capsule-section{
+    min-height:100vh;
+    position:relative;
+    display:grid;
+    place-items:center;
+    padding:3.2rem 1.2rem;
+  }
+  
+  /* 1) 黑底文本块 */
+  .concept{ background:#000; }
+  .concept-panel{
+    max-width: 960px;
+    background: rgba(0,0,0,.82);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 18px;
+    padding: clamp(1.4rem, 3vw, 2.2rem);
+    box-shadow: 0 10px 40px rgba(0,0,0,.45);
+  }
+  .capsule-title{
+    font-family:"Playfair Display", Georgia, serif;
+    font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+    margin: 0 0 .8rem;
+    letter-spacing:.4px;
+  }
+  .capsule-intro{
+    line-height:1.85;
+    color:#ececec;
+    font-size: clamp(.98rem, 1.6vw, 1.08rem);
+    margin:.5rem 0;
+  }
+  
+  /* 2 & 4) 全屏背景区（概念/成品） */
+  .hero-image,
+  .final{
+    --bg:none;
+    background:
+      radial-gradient(transparent, rgba(0,0,0,.28)),
+      var(--bg) center/cover no-repeat fixed;
+  }
+  
+  /* 小的角标/说明牌 */
+  .img-credit,
+  .final-overlay{
+    position:absolute;
+    right:1rem; bottom:1rem;
+    background:rgba(0,0,0,.45);
+    padding:.6rem .9rem;
+    border-radius:10px;
+    font-size:.9rem;
+    box-shadow:0 8px 24px rgba(0,0,0,.35);
+  }
+  .final-title{
+    margin:0 0 .3rem;
+    font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+    font-family:"Playfair Display", serif;
+  }
+  .caption{ color:#eee; }
+  
+  /* 3) 制作过程图 */
+  .process{ background:#0c0c0c; text-align:center; }
+  .subhead{
+    font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+    font-family:"Playfair Display", serif;
+    margin:0 0 .4rem;
+  }
+  .process-img{
+    width: min(1100px, 90vw);
+    display:block; margin: 1rem auto 0;
+    border-radius:14px;
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+  }
+  
+  /* 悬浮返回按钮（右下角） */
+  .back-floating{
+    position:fixed; right:16px; bottom:16px; z-index:10;
+  }
+  .btn-ghost{
+    display:inline-block;
+    padding:.6rem 1rem;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.55);
+    color:#fff; text-decoration:none;
+    background:rgba(0,0,0,.35);
+    backdrop-filter: blur(6px);
+    transition:.25s ease;
+  }
+  .btn-ghost:hover{ transform: translateY(-2px); }
+  
+  /* 轻入场效果 */
+  .concept-panel, .process-img, .final-overlay{
+    opacity:0; transform: translateY(10px);
+    animation: fadeUp .8s ease .08s forwards;
+  }
+  @keyframes fadeUp{ to{ opacity:1; transform:none; } }
+  
+  /* 让全屏区块的背景图片真正铺满 */
+  .capsule-section.hero-image,
+  .capsule-section.final{
+    padding:0;    /* 纯视觉全屏 */
+  }
+  

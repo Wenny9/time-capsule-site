@@ -1,72 +1,84 @@
-/* Base */
+/* ===== 基础 ===== */
 * { box-sizing: border-box; margin: 0; }
 html, body { height: 100%; background: #0b0b0c; color: #f4f4f4; font-family: Inter, system-ui, Arial, sans-serif; }
 
-/* Scenes */
-section.scene { position: relative; height: 100vh; overflow: hidden; }
-.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.75); transform: scale(1.05); }
-.bg-grad-p2, .bg-grad-p3 { position: absolute; inset: 0; background: radial-gradient(transparent, rgba(0,0,0,0.35)); pointer-events:none; }
-.text { position: absolute; left: 8vw; bottom: 12vh; max-width: 620px; }
-h1, h2 { margin-bottom: 12px; font-family: "Playfair Display", serif; letter-spacing: .3px; }
-p { line-height: 1.75; opacity: 0.92; }
-.title { opacity: 0; transform: translateY(16px); }
-
-/* Buttons */
-.btn { margin-top: 16px; padding: 10px 16px; border: 1px solid #fff; background: transparent; color: #fff; cursor: pointer; transition: .25s; border-radius: 999px; }
-.btn:hover { background: rgba(255,255,255,0.12); }
-.btn-large { font-size: 1.2rem; padding: 14px 28px; margin-top: 20px; border-radius: 999px; border: 1px solid #fff; background: transparent; color: #fff; transition: .3s; }
-.btn-large:hover { background: rgba(255,255,255,0.15); }
-.center { top: 50%; left: 50%; transform: translate(-50%, -50%); position: absolute; text-align: center; }
-
-/* Topbar */
-.topbar { position: fixed; top: 0; left: 0; right: 0; height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; backdrop-filter: blur(6px); background: linear-gradient(to bottom, rgba(10,10,12,.65), rgba(10,10,12,.1)); z-index: 10; }
+/* 顶部栏 */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 16px; backdrop-filter: blur(6px);
+  background: linear-gradient(to bottom, rgba(10,10,12,.65), rgba(10,10,12,.1));
+  z-index: 10;
+}
 .brand { font-weight: 700; letter-spacing: .4px; }
 .controls { display: flex; align-items: center; gap: 12px; }
 .progress { width: 160px; height: 4px; background: rgba(255,255,255,0.15); border-radius: 999px; overflow: hidden; }
-#progress-bar { display: block; height: 100%; width: 0%; background: #76e8ff; }
+#progress-bar { height: 100%; width: 0%; background: #76e8ff; display: block; }
 
-/* Gallery page */
-.gallery-page { background: radial-gradient(circle at 50% 50%, #141414, #000); color: #fff; font-family: Inter, sans-serif; text-align: center; padding-top: 60px; }
-.gallery-header { margin: 36px 0 20px; }
-.gallery-header p { opacity: 0.85; margin-bottom: 40px; }
-.gallery-grid { display: grid; grid-template-columns: repeat(3, minmax(240px, 1fr)); gap: 28px; width: 90%; max-width: 1100px; margin: 0 auto 60px; }
-.item { position: relative; cursor: pointer; transition: transform .3s ease; }
+.btn { padding: 10px 16px; border: 1px solid #fff; background: transparent; color: #fff; border-radius: 999px; cursor: pointer; transition: .25s; }
+.btn:hover { background: rgba(255,255,255,0.12); }
+.btn-large { font-size: 1.15rem; padding: 14px 28px; }
+
+/* ===== 首页三屏 ===== */
+.scene { position: relative; min-height: 100vh; overflow: hidden; }
+.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(.85); }
+.text { position: absolute; left: 8vw; bottom: 12vh; max-width: 620px; }
+.title { font-family: "Playfair Display", serif; margin-bottom: 12px; }
+
+#p1 .bg { filter: brightness(.9); }
+
+/* 封面“按钮在正中央” */
+.center.hero {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  text-align: center; max-width: 720px;
+}
+.center.hero .title { font-size: clamp(1.6rem, 3vw, 2.4rem); margin-bottom: 8px; }
+
+/* ===== Gallery 页（桌面端布局）===== */
+body.gallery-page {
+  background-image:
+    linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.25)),
+    url("assets/bg12.JPG");
+  background-position: center; background-repeat: no-repeat; background-size: cover;
+  color:#fff; text-align:center; padding-top: 64px;
+}
+
+.gallery-header h1 { font-family: "Playfair Display", serif; margin-top: 32px; margin-bottom: 8px; }
+.gallery-header p { opacity: .85; margin-bottom: 28px; }
+
+/* 桌面端：固定 3 + 2 布局（不做手机适配） */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 260px);
+  justify-content: center;
+  gap: 28px 80px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto 70px;
+}
+.gallery-grid .item:nth-child(n+4) { grid-column: span 1; }
+
+/* 相片卡片：不裁剪原图 */
+.item { transition: transform .25s; cursor: pointer; }
 .item:hover { transform: translateY(-6px); }
-.item .photo { width: 100%; height: 260px; display: flex; align-items: center; justify-content: center; background: #111; border-radius: 10px; overflow: hidden; }
-.item .photo img { width: 100%; height: 100%; object-fit: cover; }
-.item .label { position: absolute; left: 0; right: 0; bottom: 12px; font-weight: 600; background: rgba(0,0,0,0.45); padding: 8px 0; border-radius: 0 0 10px 10px; }
+.item .photo {
+  width: 260px; height: 220px; margin: 0 auto;
+  display:flex; align-items:center; justify-content:center;
+  background: transparent; border-radius: 10px; overflow:hidden;
+}
+.item .photo img { max-width:100%; max-height:100%; object-fit: contain; }
 
-/* Video modal */
-.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 50; }
-.modal.hidden { display: none; }
-.modal-content { position: relative; width: 80%; max-width: 900px; }
-.modal-content video { width: 100%; border-radius: 8px; background: #000; }
-#closeModal { position: absolute; top: -12px; right: -12px; background: #fff; color: #000; border: none; border-radius: 50%; font-size: 20px; width: 32px; height: 32px; cursor: pointer; }
+/* 去掉半透明黑条，换童趣字体 */
+.item .label {
+  display:block; margin-top: 10px; color:#fff;
+  font-family: "Baloo 2", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  font-weight: 600; letter-spacing: .2px;
+  text-shadow: 0 1px 2px rgba(0,0,0,.45);
+}
 
-/* Capsule page */
-.capsule-page { color: #fff; background: #000; overflow-x: hidden; font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
-.capsule-section { min-height: 100vh; position: relative; display: grid; place-items: center; padding: 3rem 1.2rem; }
-.concept { background: #000; }
-.concept-panel { max-width: 920px; background: rgba(0,0,0,0.85); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; padding: 2.2rem 2rem; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
-.capsule-title { font-family: "Playfair Display", Georgia, serif; font-size: 2.2rem; margin: 0 0 1rem; letter-spacing: .5px; }
-.capsule-intro { line-height: 1.8; color: #eee; }
-.hero-image, .final { --bg: none; background: radial-gradient(transparent, rgba(0,0,0,.25)), var(--bg) center/cover no-repeat fixed; }
-.img-credit, .final-overlay { position: absolute; inset: auto 1rem 1rem auto; background: rgba(0,0,0,0.45); padding: .6rem .9rem; border-radius: 10px; font-size: .9rem; }
-.process { background: #0c0c0c; text-align: center; }
-.subhead { font-size: 1.8rem; margin: 0 0 .5rem; font-family: "Playfair Display", serif; }
-.caption { color: #cfcfcf; margin-bottom: 1.4rem; }
-.process-img { width: min(1100px, 90vw); border-radius: 14px; display: block; margin-inline: auto; box-shadow: 0 20px 60px rgba(0,0,0,.45); }
-.final-title { margin: 0; font-size: 2rem; font-family: "Playfair Display", serif; }
-.final .caption { margin-top: .4rem; color: #eee; }
-.back-floating { position: fixed; right: 16px; bottom: 16px; z-index: 10; }
-.btn-ghost { display: inline-block; padding: .6rem 1rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.5); color: #fff; text-decoration: none; background: rgba(0,0,0,.35); backdrop-filter: blur(6px); transition: .25s ease; }
-.btn-ghost:hover { transform: translateY(-2px); }
-
-/* Future page */
-.future-page { font-family: 'Inter', sans-serif; color: #fff; overflow-x: hidden; }
-.future-world { background: url('assets/future_bg.jpg') center/cover no-repeat; min-height: 100vh; display: flex; justify-content: center; align-items: center; position: relative; }
-.future-world .overlay { background: rgba(0,0,0,0.55); padding: 3rem; border-radius: 20px; max-width: 800px; text-align: center; }
-.storyboard { background: #f9f9f9; color: #111; text-align: center; padding: 4rem 1rem; }
-.storyboard-img { width: 85%; max-width: 1100px; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.2); }
-.video-showcase { background: #0d0d0d; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
-.video-showcase video { width: 80%; max-width: 900px; border-radius: 12px; box-shadow: 0 0 25px rgba(255,200,180,0.3); }
+/* 弹窗视频（桌面尺寸） */
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,.85); display: none; align-items:center; justify-content:center; z-index: 100; }
+.modal:not(.hidden) { display: flex; }
+.modal-content { position: relative; width: min(90vw, 960px); max-height: 85vh; }
+.modal-content video { display:block; width:100%; max-height:85vh; background:#000; border-radius:12px; box-shadow: 0 20px 60px rgba(0,0,0,.6); }
+#closeModal { position: absolute; top: -12px; right: -12px; width: 36px; height: 36px; border: none; border-radius: 50%; background: #fff; color: #000; font-size: 20px; cursor: pointer; }

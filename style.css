@@ -403,3 +403,229 @@ body.gallery-page {
   background: radial-gradient(transparent, rgba(0,0,0,0.35));
   pointer-events: none;
 }
+
+/* ===== HERO BACKGROUND HARDENED FIX (append at end) ===== */
+
+/* 统一场景高度，兼容移动端地址栏高度波动 */
+.scene { min-height: 100svh !important; }
+
+/* 背景图可见、在底层、不被别的层覆盖 */
+.scene .bg {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+  z-index: 0 !important;
+  opacity: 1 !important;
+  /* 如果想保留轻微放大，可改为 1.02；先保证可见性 */
+  transform: none !important;
+  filter: none !important; /* 先去掉全局降亮，图太暗时看不出 */
+}
+
+/* 渐变遮罩必须半透明，且在背景之上、文字之下 */
+.bg-grad-p2, .bg-grad-p3, .bg-grad {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  background: radial-gradient(transparent, rgba(0,0,0,0.35)) !important;
+  pointer-events: none !important;
+}
+
+/* 文本一定在最上层可见 */
+.scene .text {
+  position: relative !important;
+  z-index: 2 !important;
+  opacity: 1 !important;
+  transform: none !important; /* 避免因初始动画隐藏 */
+}
+
+/* 仅首屏如需轻微压暗，用更温和的亮度 */
+#p1 .bg { filter: brightness(0.9) !important; }
+
+/* 顶部导航在最上，不影响背景显示 */
+.topbar { z-index: 1000 !important; }
+
+/* ---- Mobile-first fixes ---- */
+
+/* iOS 字号缩放 & 安全区 */
+html {-webkit-text-size-adjust: 100%;}
+.topbar{
+  height: calc(48px + env(safe-area-inset-top));
+  padding-top: env(safe-area-inset-top);
+}
+
+/* 让场景在移动端按可视高度铺满（避免地址栏高度抖动） */
+.scene { min-height: 100svh; }
+
+/* iOS 上禁用 fixed 背景避免抖动；改用普通 scroll 背景 */
+@media (max-width: 900px){
+  body.gallery-page{
+    background-attachment: scroll !important;
+    background-position: center top !important;
+  }
+}
+
+/* ---------- 首页三屏文字在手机上更紧凑 ---------- */
+@media (max-width: 600px){
+  .text{ left: 6vw; bottom: 12vh; max-width: 88vw; }
+  #p1 .title, #p2 .title, #p3 .title{ font-size: clamp(1.2rem, 6vw, 1.6rem); }
+  .scene p{ font-size: .95rem; line-height: 1.6; }
+  .btn-large{ font-size: 1rem; padding: 12px 20px; }
+}
+
+/* ---------- Gallery：单列/两列自适应 ---------- */
+@media (max-width: 1100px){
+  .gallery-grid{
+    width: 94%;
+    max-width: 980px;
+    gap: 20px;
+  }
+  .item{ width: 260px; }
+  .item .photo{ height: 220px; }
+}
+
+@media (max-width: 800px){
+  .gallery-grid{
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr); /* 两列 */
+    gap: 18px;
+    width: 92%;
+    max-width: 700px;
+  }
+  .item{ width: 100% !important; }
+  .item .photo{ height: clamp(160px, 34vw, 210px); }
+  .item .label{ font-size: 0.95rem; }
+}
+
+@media (max-width: 480px){
+  .gallery-grid{
+    grid-template-columns: 1fr; /* 单列 */
+    gap: 16px;
+    width: min(92vw, 420px);
+    margin-bottom: 72px; /* 底部多一些留白，避免贴边 */
+  }
+  .item{ width: 100% !important; }
+  .item .photo{
+    height: clamp(180px, 54vw, 260px); /* 根据屏宽自适应高度 */
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.25);
+  }
+  .item .label{
+    margin-top: 10px;
+    font-size: 1.05rem; /* 移动端读得更清楚 */
+  }
+}
+
+/* Gallery 页面上下内边距更合理 */
+@media (max-width: 600px){
+  .gallery-page{ padding-top: calc(18px + env(safe-area-inset-top)); padding-bottom: 80px; }
+  .gallery-header h1{ font-size: 1.3rem; }
+  .gallery-header p{ font-size: .95rem; margin-bottom: 18px; }
+}
+
+/* ---------- 弹窗视频：铺满但不溢出 ---------- */
+@media (max-width: 900px){
+  .modal-content{
+    width: 94vw;
+    max-height: 84svh;
+  }
+  .modal-content video{
+    width: 100%;
+    max-height: 74svh;   /* 留空间给圆角和阴影 */
+    border-radius: 10px;
+  }
+  #closeModal{
+    top: -10px; right: -10px;
+    width: 34px; height: 34px;
+    font-size: 18px;
+  }
+}
+
+/* ---------- 卡片图像保险：不裁切、不变形 ---------- */
+.item .photo img{
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ====== Mobile fixes for gallery (place at the very end of style.css) ====== */
+
+/* 1) 统一卡片的最大宽度，避免过大 */
+@media (max-width: 768px) {
+    .gallery-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      width: 92%;
+      max-width: 100%;
+      margin: 0 auto 64px;
+      padding-bottom: 24px;
+    }
+    .item {
+      width: min(88vw, 360px);    /* 手机上卡片宽度上限 */
+      margin: 0 auto;
+    }
+  
+    /* 2) 图片不裁剪：去掉固定高度，用自适应高度 + contain */
+    .item .photo {
+      width: 100%;
+      height: auto;               /* 关键：不锁定高度 */
+      display: block;
+      background: transparent;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .item .photo img {
+      display: block;
+      width: 100%;
+      height: auto;               /* 高度自适应 */
+      object-fit: contain;        /* 不裁剪，完整显示拍立得PNG */
+      filter: none;               /* 避免二次变暗 */
+    }
+  
+    /* 3) 文案尺寸与间距更友好 */
+    .gallery-header h1 {
+      font-size: clamp(1.6rem, 6vw, 2.2rem);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .gallery-header p {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      opacity: .9;
+    }
+    .item .label {
+      font-size: 1.05rem;
+      margin-top: 10px;
+      text-shadow: 0 1px 2px rgba(0,0,0,.35);
+    }
+  
+    /* 4) iOS fixed 背景在移动端改为滚动，避免错位/性能问题 */
+    body.gallery-page {
+      background-attachment: scroll;
+      background-size: cover;
+      background-position: center;
+    }
+  
+    /* 5) 顶部整体留白，避免被手机浏览器地址栏遮挡 */
+    .gallery-page {
+      padding-top: 72px;
+      padding-bottom: 120px; /* 底部留白，避免被工具栏遮挡 */
+    }
+  }
+  
+  /* 更小屏（<= 420px）时再收紧一点 */
+  @media (max-width: 420px) {
+    .item { width: min(92vw, 330px); }
+    .item .label { font-size: 1rem; }
+  }
+  
+  @media (max-width: 768px) {
+    #p1 .bg, #p2 .bg, #p3 .bg { transform: none; } /* 去掉额外缩放视差，减抖动 */
+  }
+  

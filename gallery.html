@@ -42,14 +42,17 @@
   </div>
 
   <!-- 弹窗视频播放器 -->
-  <div id="videoModal" class="modal hidden" aria-hidden="true">
-    <div class="modal-content" role="dialog" aria-label="Story video">
-      <!-- 提前声明两种常见类型，提升兼容；真正的 src 由 JS 注入 -->
-      <video id="storyVideo" controls playsinline preload="metadata"></video>
-      <button id="closeModal" aria-label="Close video">×</button>
+  <!-- 弹窗视频播放器 -->
+<div id="videoModal" class="modal hidden">
+    <div class="modal-content">
+      <video id="storyVideo" controls playsinline></video>
+      <button id="closeModal">×</button>
     </div>
   </div>
+  
 
   <script src="script.js"></script>
 </body>
 </html>
+
+

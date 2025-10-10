@@ -696,5 +696,87 @@ html {-webkit-text-size-adjust: 100%;}
     .storyboard-img { width: 94%; border-radius: 10px; }
     .video-showcase video { width: 94%; max-width: 100%; }
   }
+
+  /* -------- iOS 视口高度与安全区 -------- */
+:root {
+    /* iOS 安全区 */
+    --safe-top: env(safe-area-inset-top);
+    --safe-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .topbar {
+    padding-top: calc(4px + var(--safe-top));
+    height: auto;
+    min-height: 48px;
+  }
+  
+  /* 用 100svh 修正 iOS 地址栏导致的 100vh 不准 */
+  section.scene {
+    min-height: 100svh;
+  }
+  
+  /* 让首屏背景优先露出熊的脸（向上偏一点） */
+  #p1 .bg {
+    object-position: center 22%;
+  }
+  
+  /* 给首屏加一层轻微暗角，提升文字可读性 */
+  #p1::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg,
+      rgba(0,0,0,.15) 0%,
+      rgba(0,0,0,.22) 45%,
+      rgba(0,0,0,.35) 100%);
+    pointer-events: none;
+  }
+  
+  /* --------- 手机端整体适配（<=600px） --------- */
+  @media (max-width: 600px) {
+  
+    /* 首页三屏的文字容器：真正居中并控制宽度 */
+    .text.center {
+      left: 50%;
+      top: 56%;
+      transform: translate(-50%, -50%);
+      max-width: 86vw;
+      text-align: center;
+    }
+  
+    /* 首页标题/副标题/按钮字号 */
+    #p1 .title {
+      font-size: clamp(22px, 8vw, 32px);
+      line-height: 1.15;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 6px rgba(0,0,0,.35);
+    }
+    #p1 p {
+      font-size: clamp(14px, 4.2vw, 18px);
+      line-height: 1.55;
+      margin: 6px auto 10px;
+      text-shadow: 0 1px 4px rgba(0,0,0,.35);
+    }
+    .btn-large {
+      font-size: clamp(14px, 4.2vw, 16px);
+      padding: 10px 16px;
+      border-radius: 999px;
+    }
+  
+    /* 顶部进度条在超小屏隐藏，避免遮挡 */
+    .progress { display: none; }
+  
+    /* 背景不做放大，避免小屏溢出 */
+    .scene .bg { transform: none; }
+  
+    /* Gallery 单列 & 不裁切（你已加过，这里兜底再覆盖一次） */
+    .gallery-grid { display:block; width:100%; padding:0 14px; }
+    .item { width:92vw; max-width:560px; margin:0 auto 26px; }
+    .item .photo { aspect-ratio: 3/4; }
+    .item .photo img { object-fit: contain; }
+    .item .label { font-size: clamp(14px, 4.4vw, 18px); }
+  
+    /* iOS 上固定背景会抖动，移动端统一改为 scroll */
+    body.gallery-page { background-attachment: scroll; }
+  }
   
   

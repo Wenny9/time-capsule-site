@@ -57,49 +57,41 @@ body.gallery-page{
   .gallery-header p  { opacity: .85; margin-bottom: 24px; }
   
   /* —— 固定成 “第一排3个 + 第二排2个” 居中 —— */
-  .gallery-grid{
-    display: grid;
-    grid-template-columns: repeat(3, 300px); /* 第一排3列 */
-    justify-content: center;                 /* 所有列居中 */
-    column-gap: 64px;                        /* 列间距 */
-    row-gap: 40px;                           /* 行间距 */
+  /* 容器：每行内容水平居中，自动换行，行/列间距可调 */
+.gallery-grid{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* 关键：让每一行都居中 */
+    gap: 56px 64px;          /* 行距 / 列距：行 56px，列 64px，可按需调 */
+    max-width: 1100px;
+    margin: 0 auto;          /* 整个区域居中 */
+    padding-bottom: 40px;    /* 防止贴底 */
+  }
+  
+  /* 卡片：统一固定宽度，行内对齐 */
+  .item{
+    width: 280px;            /* 统一宽度，首行 3 个，次行 2 个时也会居中 */
+    margin: 0;               /* 避免默认 margin 影响对齐 */
+    text-align: center;
+  }
+  
+  /* 如果你的相框是包在 .photo 里，确保不裁图 */
+  .item .photo{
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto 60px;
+    height: 220px;           /* 相框高度 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent; /* 让后面背景图透出 */
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .item .photo img{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;     /* 不裁切图片 */
   }
   
-  /* 每个 item 固定宽度，便于整齐 */
-  .gallery-grid .item{ width: 300px; margin: 0 auto; transition: transform .25s; cursor: pointer; }
-  .gallery-grid .item:hover{ transform: translateY(-6px); }
-  
-  /* —— 相片盒：透明底、不裁图 —— */
-  .gallery-grid .item .photo{
-    width: 100%;
-    aspect-ratio: 4 / 3;                     /* 统一比例，避免高度乱 */
-    display: flex; align-items: center; justify-content: center;
-    background: transparent;                 /* 透明PNG的“衬底”=透明 */
-    border-radius: 12px; overflow: hidden;
-  }
-  .gallery-grid .item .photo img{
-    max-width: 100%; max-height: 100%;
-    object-fit: contain;                     /* 不裁剪 */
-    image-rendering: auto;
-  }
-  
-  /* —— 去掉半透明黑条，改圆润童趣字体 —— */
-  .gallery-grid .item .label{
-    position: static;                        /* 不盖在图上 */
-    display: block;
-    margin-top: 10px;
-    padding: 0;
-    background: transparent;                 /* 去掉半透明黑框 */
-    color: #fff;
-    font-family: "Baloo 2", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
-    font-weight: 600;
-    letter-spacing: .2px;
-    text-shadow: 0 1px 2px rgba(0,0,0,.45);  /* 让字在彩色背景上更清楚 */
-    border-radius: 0;
-  }
   
   /* 兜底：覆盖之前可能遗留的绝对定位/背景 */
   .item span{ position: static !important; background: transparent !important; }

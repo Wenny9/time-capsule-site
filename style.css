@@ -118,16 +118,34 @@ body.gallery-page::before {
   font-size: clamp(24px, 4vw, 38px); margin-bottom: .4rem;
 }
 .gallery-header p{ opacity:.9; margin-bottom: 28px; }
+.gallery-header {
+    margin-bottom: 0;
+    transform: translateY(-20px);   /* 上移整个标题和内容 */
+  }
+  
 
 /* 栅格布局 + 卡片尺寸微调（更小） */
-.gallery-grid{
-  display:flex; flex-wrap:wrap; justify-content:center;
-  gap: 24px; max-width: 1040px; margin: 0 auto 80px;
-}
-.item{
-  width: 220px; text-align:center; cursor:pointer;
-  transition: transform .3s ease;
-}
+.gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px 60px;                 /* 增加间距，更整齐 */
+    max-width: 900px;               /* 限制总宽度让第二行居中 */
+    margin: 40px auto 60px;         /* 整体往上移（减少 bottom 间距） */
+  }
+  
+  .item {
+    width: 260px;                   /* 保持视觉一致 */
+    text-align: center;
+    transition: transform .3s ease;
+    cursor: pointer;
+  }
+
+  .gallery-grid::after {
+    content: "";
+    flex-basis: 260px;              /* 虚拟的第六格，用来平衡布局 */
+  }
+    
 .item:hover{ transform: translateY(-6px); }
 .item .photo img{ width:100%; border-radius:10px; display:block; object-fit:contain; }
 .item .label{

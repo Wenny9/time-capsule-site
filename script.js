@@ -123,7 +123,7 @@ if (window.gsap && window.ScrollTrigger) {
         modalEl.classList.remove('show');
         modalEl.classList.add('hidden');
         document.body.style.overflow = '';
-      };
+      };      
            
   
     cards.forEach(card => {

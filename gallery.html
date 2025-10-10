@@ -8,6 +8,61 @@
   <!-- 童趣圆润字体 -->
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ---- GALLERY 关键样式（先内联验证）---- */
+    body.gallery-page {
+      position: relative;
+      min-height: 100vh;
+      color: #fff;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      text-align: center;
+      padding-top: 60px;
+      background: #000;
+      overflow-x: hidden;
+    }
+    body.gallery-page::before {
+      content: "";
+      position: fixed; inset: 0;
+      background:
+        linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.25)),
+        url("assets/bg12.JPG") center/cover no-repeat;
+      filter: blur(4px) brightness(.8);
+      z-index: -1;
+    }
+    .gallery-header h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(24px, 4vw, 38px);
+      margin-bottom: .4rem;
+    }
+    .gallery-header p { opacity: .9; margin-bottom: 32px; }
+  
+    /* 关键：栅格容器 */
+    .gallery-grid {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 28px; max-width: 1100px; margin: 0 auto 80px;
+    }
+    .item { width: 260px; text-align: center; transition: transform .3s ease; }
+    .item:hover { transform: translateY(-6px); }
+    .item .photo img { width: 100%; border-radius: 10px; display: block; object-fit: contain; }
+    .item .label {
+      display: block; margin-top: 10px; color: #fff;
+      font-family: "Baloo 2", Inter, sans-serif; font-weight: 600; letter-spacing: .3px;
+      text-shadow: 0 1px 3px rgba(0,0,0,.5);
+    }
+  
+    /* 弹窗样式 */
+    .modal { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,.6); z-index: 2000; }
+    .modal.hidden { display: none; }
+    .modal .modal-content {
+      position: relative; width: min(92vw, 960px); max-height: 88vh;
+      background: #000; border-radius: 12px; padding: 12px; box-shadow: 0 12px 40px rgba(0,0,0,.45);
+    }
+    .modal video { width: 100%; height: auto; display: block; border-radius: 8px; }
+    #closeModal {
+      position: absolute; top: 8px; right: 10px; width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.5); background: rgba(0,0,0,.35); color: #fff;
+      font-size: 20px; line-heig
+  
 </head>
 <body class="gallery-page">
 

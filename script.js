@@ -4,9 +4,11 @@ if (window.gsap && window.ScrollTrigger) {
   
     // 进入每个场景：标题淡入、文本上浮、背景视差
     document.querySelectorAll('.scene').forEach((sec) => {
-      const textEl = sec.querySelector('.text');
+      // 1) 文本容器：兼容 .text / .hero-inner
+      const textEl = sec.querySelector('.text, .hero-inner');
       if (textEl) {
-        gsap.fromTo(textEl,
+        gsap.fromTo(
+          textEl,
           { y: 24, opacity: 0 },
           {
             y: 0, opacity: 1, duration: 0.9, ease: 'power2.out',
@@ -15,14 +17,16 @@ if (window.gsap && window.ScrollTrigger) {
         );
       }
   
-      const title = sec.querySelector('.title');
-      if (title) {
-        gsap.to(title, {
+      // 2) 标题：兼容 .title / .hero-title
+      const titleEl = sec.querySelector('.title, .hero-title');
+      if (titleEl) {
+        gsap.to(titleEl, {
           opacity: 1, y: 0, duration: 0.8, delay: 0.05,
           scrollTrigger: { trigger: sec, start: 'top 72%', toggleActions: 'play none none reverse' }
         });
       }
   
+      // 3) 背景视差
       const bg = sec.querySelector('.bg');
       if (bg) {
         gsap.to(bg, {
@@ -32,6 +36,7 @@ if (window.gsap && window.ScrollTrigger) {
       }
     });
   }
+  
   
   // ---------- 顶部进度条 ----------
   const bar = document.getElementById('progress-bar');

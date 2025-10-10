@@ -128,4 +128,14 @@ if (window.gsap && window.ScrollTrigger) {
     modalEl.addEventListener('click', (e) => { if (e.target === modalEl) closeModal(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !modalEl.classList.contains('hidden')) closeModal(); });
   });
+
+  // 让背景图加载完成后再淡入，避免白屏
+document.querySelectorAll('.scene .bg').forEach(img => {
+    if (img.complete) {
+      img.classList.add('loaded');
+    } else {
+      img.addEventListener('load', () => img.classList.add('loaded'));
+      img.addEventListener('error', () => img.classList.add('loaded')); // 即使失败也不白屏
+    }
+  });
   

@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        /* 关键占位样式：在主 CSS 未加载前，先把首屏/三屏文字居中，避免左上角闪烁 */
+        html,body{height:100%;background:#0b0b0c;margin:0}
+        .scene{min-height:100vh;position:relative}
+        .text.center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;width:min(90vw,780px)}
+        .topbar{position:fixed;top:0;left:0;right:0;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:10;color:#fff}
+    </style>
+      
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>My Time Capsule Story</title>
@@ -24,14 +32,15 @@
   </header>
 
   <!-- Hero 1 -->
-  <section class="scene" id="p1" aria-label="Five Secret Stories About Me">
-    <img class="bg" src="assets/bg1.JPG" alt="">
-    <div class="hero-inner">
-      <h1 class="hero-title">Five Secret Stories About Me</h1>
-      <p class="hero-sub">Five small things, five big memories.</p>
+  <section class="scene" id="p1">
+    <img class="bg" src="assets/bg1.JPG" alt="Cover 1"
+         loading="eager" fetchpriority="high" decoding="async">
+    <div class="text center">
+      <h1 class="title">Five Secret Stories About Me</h1>
+      <p>Five small things, five big memories.</p>
       <button class="btn btn-large" onclick="location.href='gallery.html'">Begin</button>
     </div>
-  </section>
+  </section>  
 
   <!-- Hero 2 -->
   <section class="scene" id="p2" aria-label="My Time Capsule">

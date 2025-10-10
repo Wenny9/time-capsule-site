@@ -97,3 +97,31 @@ body {
   .topbar{ height: 52px; }
   .scene .hero-inner{ margin-top: 24px; }
 }
+
+/* 背景先用深色占位，等图加载完成再淡入，避免白屏 */
+.scene { background:#0b0b0c; }
+.scene .bg {
+  position:absolute; inset:0;
+  width:100%; height:100%; object-fit:cover;
+  z-index:0; opacity:0; transition:opacity .35s;
+  filter:brightness(.78);
+}
+.scene .bg.loaded { opacity:1; }
+
+/* 三屏通用：文字盒永远居中，不受其它动画影响 */
+.scene .text.center{
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  width:min(90vw,780px); text-align:center; z-index:2;
+}
+#p1 .title{font-family:"Playfair Display",serif;font-size:clamp(28px,5vw,56px);line-height:1.15;color:#fff;margin:0 0 .6rem}
+#p2 .title,#p3 .title{font-family:"Playfair Display",serif;font-size:clamp(24px,4.2vw,44px);line-height:1.18;color:#fff;margin:0 0 .6rem}
+#p1 .text p,#p2 .text p,#p3 .text p{margin:0 auto 1.2rem;color:rgba(255,255,255,.92);font-size:clamp(14px,1.7vw,18px)}
+
+.btn.btn-large{
+  font-size:1.05rem;padding:12px 28px;border-radius:999px;
+  border:1.6px solid #fff;color:#fff;background:rgba(255,255,255,.12);
+  backdrop-filter:blur(6px);box-shadow:0 8px 24px rgba(0,0,0,.25);
+  transition:background .2s, transform .15s;
+}
+.btn.btn-large:hover{background:rgba(255,255,255,.22);transform:translateY(-1px)}

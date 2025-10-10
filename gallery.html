@@ -1,48 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600&display=swap" rel="stylesheet">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Objects of Memory</title>
+
+  <!-- 童趣圆润字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="gallery-page">
 
-  <div class="gallery-header">
+  <header class="gallery-header">
     <h1>Objects of Memory</h1>
     <p>Click each item to watch its story.</p>
-  </div>
+  </header>
 
-  <div class="item" data-video="assets/Bear.mp4">
-    <div class="photo"><img src="assets/ob1.png" alt="Teddy bear"></div>
-    <span class="label">Teddy bear</span>
-  </div>  
+  <!-- ✅ 缺失的栅格容器（非常关键） -->
+  <div class="gallery-grid">
+    <div class="item" data-video="assets/Bear.mp4">
+      <div class="photo"><img src="assets/ob1.png" alt="Teddy bear" loading="lazy"></div>
+      <span class="label">Teddy bear</span>
+    </div>
+
     <div class="item" data-video="assets/Perfume.mp4">
-      <div class="photo"><img src="assets/ob2.png" alt="Perfume"></div>
+      <div class="photo"><img src="assets/ob2.png" alt="Perfume" loading="lazy"></div>
       <span class="label">Perfume</span>
     </div>
+
     <div class="item" data-video="assets/Bag.mp4">
-      <div class="photo"><img src="assets/ob3.png" alt="Lucky bag"></div>
+      <div class="photo"><img src="assets/ob3.png" alt="Lucky bag" loading="lazy"></div>
       <span class="label">Lucky bag</span>
     </div>
+
     <div class="item" data-video="assets/Bracelet.mp4">
-      <div class="photo"><img src="assets/ob4.png" alt="Bracelets"></div>
+      <div class="photo"><img src="assets/ob4.png" alt="Bracelets" loading="lazy"></div>
       <span class="label">Bracelets</span>
     </div>
+
     <div class="item" data-video="assets/Ring.mp4">
-      <div class="photo"><img src="assets/ob5.png" alt="Ring"></div>
+      <div class="photo"><img src="assets/ob5.png" alt="Ring" loading="lazy"></div>
       <span class="label">Ring</span>
     </div>
-  </div>
-  
-  
+  </div> <!-- /gallery-grid -->
 
   <!-- 弹窗视频播放器 -->
-  <div id="videoModal" class="modal hidden">
+  <div id="videoModal" class="modal hidden" aria-hidden="true">
     <div class="modal-content">
-      <video id="storyVideo" controls></video>
-      <button id="closeModal">×</button>
+      <!-- ✅ iOS/安卓内联播放，避免强制全屏 -->
+      <video id="storyVideo" controls playsinline webkit-playsinline></video>
+      <button id="closeModal" aria-label="Close">×</button>
     </div>
   </div>
 

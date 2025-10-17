@@ -105,30 +105,30 @@ body.gallery-page::before {
   font-size: clamp(24px, 4vw, 38px);
   margin-bottom: .4rem;
 }
-.gallery-header p { opacity: .9; margin-bottom: 28px; }
+/* === Gallery：三列固定 + 第二排自动居中 + 上移 === */
 
-/* 栅格布局（3+2 排列） */
-/* ===== Gallery：用 CSS Grid 固定 3 列，最后一行 2 个自动居中 ===== */
+/* 整体再往上提一点（标题区不动，卡片区更靠近标题） */
+.gallery-page .gallery-header{ margin-bottom: 6px; transform: translateY(-10px); }
 
-/* 容器：三列固定宽度，整体居中 */
+/* 用 GRID 固定三列：卡片宽度这里定死 */
 .gallery-page .gallery-grid{
   display: grid;
-  grid-template-columns: repeat(3, 220px); /* 卡片宽度改这里 */
+  grid-template-columns: repeat(3, 210px);  /* ← 想更大/更小改这里 */
   justify-content: center;                  /* 整个网格居中 */
-  gap: 36px 56px;                           /* 行距 / 列距 */
-  margin: 24px auto 120px;                  /* 上移 + 底部留白 */
+  gap: 32px 56px;                           /* 行距 / 列距 */
+  margin: 8px auto 96px;                    /* 上移 + 底部留白 */
 }
 
-/* 卡片：不再需要固定 width，交给 grid 列宽 */
+/* 卡片尺寸跟列宽一致（更稳） */
 .gallery-page .item{
-  width: 220px;               /* 与 grid 列宽一致，稳妥 */
+  width: 210px;
   text-align: center;
   cursor: pointer;
   transition: transform .3s ease;
 }
 .gallery-page .item:hover{ transform: translateY(-6px); }
 
-/* 确保图片不溢出 */
+/* 图片不溢出卡片 */
 .gallery-page .item .photo img{
   width: 100%;
   height: auto;
@@ -137,18 +137,19 @@ body.gallery-page::before {
   border-radius: 10px;
 }
 
-/* 关键：若最后一行有 2 个且总数为奇数（例如 5 个），把倒数第 2 个挪到第 2 列，实现“2 张居中” */
-.gallery-page .gallery-grid > .item:nth-last-child(2):nth-child(odd) {
-  grid-column: 2;   /* 放在中间那列 */
+/* 关键：当总数为奇数（5 张）时，让第 4 张落在第 2 列，实现“第二排两张居中” */
+.gallery-page .gallery-grid > .item:nth-last-child(2):nth-child(odd){
+  grid-column: 2 !important;   /* 放在中间那列，!important 防被覆盖 */
 }
 
-/* 移动端两列 */
+/* 移动端：两列 */
 @media (max-width: 640px){
   .gallery-page .gallery-grid{
     grid-template-columns: repeat(2, minmax(160px, 1fr));
-    gap: 28px 24px;
+    gap: 24px 20px;
+    margin: 4px auto 72px;
   }
-  .gallery-page .item{ width: 100%; max-width: 196px; margin-inline: auto; }
+  .gallery-page .item{ width: 100%; max-width: 180px; margin-inline: auto; }
 }
 
 /* Modal 弹窗 */

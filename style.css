@@ -108,33 +108,34 @@ body.gallery-page::before {
 .gallery-header p { opacity: .9; margin-bottom: 28px; }
 
 /* 栅格布局（3+2 排列） */
-.gallery-grid {
-  display: flex; flex-wrap: wrap; justify-content: center;
-  gap: 40px 60px;
-  max-width: 900px;
+/* 1) 栅格容器：保持“三张 + 两个间距”的总宽度 */
+.gallery-grid{
+  display:flex; flex-wrap:wrap; justify-content:center;
+  gap: 40px 60px;                 /* 行距40 / 列距60 不变 */
+  max-width: 810px;               /* ← 由 900 改为 810 （= 230*3 + 60*2） */
   margin: 24px auto 120px;
 }
-.gallery-grid::after {
-  content: ""; display: block; flex-basis: 260px; height: 0;
-}
-.item {
-  width: 260px;
-  text-align: center;
+
+/* 2) 卡片整体更小 */
+.item{
+  width: 230px;                   /* ← 由 260 改为 230 */
+  text-align:center; cursor:pointer;
   transition: transform .3s ease;
-  cursor: pointer;
 }
-.item:hover { transform: translateY(-6px); }
-.item .photo img {
-  width: 100%; border-radius: 10px; display: block; object-fit: contain;
+
+/* 3) 第二排自动居中（占位的“第六格”要和 .item 同宽） */
+.gallery-grid::after{
+  content:"";
+  display:block;
+  flex-basis: 230px;              /* ← 同步为 230 */
+  height:0;
 }
-.item .label {
-  display: block; margin-top: 10px; color: #fff;
-  font-family: "Baloo 2", Inter, sans-serif; font-weight: 600; letter-spacing: .3px;
-  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+
+/* 移动端两列保持不变 */
+@media (max-width: 640px){
+  .item{ width: 44vw; max-width: 200px; }  /* 可稍微再小一点 */
 }
-@media (max-width: 640px) {
-  .item { width: 44vw; max-width: 210px; }
-}
+
 
 /* Modal 弹窗 */
 .modal {

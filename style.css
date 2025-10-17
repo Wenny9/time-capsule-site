@@ -108,33 +108,28 @@ body.gallery-page::before {
 .gallery-header p { opacity: .9; margin-bottom: 28px; }
 
 /* 栅格布局（3+2 排列） */
-/* ========= Gallery (gallery.html) 修正版 ========= */
-.gallery-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 36px 56px;            /* 行距 / 列距 */
-  max-width: 780px;          /* = 220*3 + 56*2  ← 精确匹配 */
-  margin: 20px auto 100px;   /* 整体往上移一点 */
+/* ===== Gallery：用 CSS Grid 固定 3 列，最后一行 2 个自动居中 ===== */
+
+/* 容器：三列固定宽度，整体居中 */
+.gallery-page .gallery-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 220px); /* 卡片宽度改这里 */
+  justify-content: center;                  /* 整个网格居中 */
+  gap: 36px 56px;                           /* 行距 / 列距 */
+  margin: 24px auto 120px;                  /* 上移 + 底部留白 */
 }
 
-.item {
-  width: 220px;              /* 卡片再小一点 */
+/* 卡片：不再需要固定 width，交给 grid 列宽 */
+.gallery-page .item{
+  width: 220px;               /* 与 grid 列宽一致，稳妥 */
   text-align: center;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform .3s ease;
 }
+.gallery-page .item:hover{ transform: translateY(-6px); }
 
-.gallery-grid::after {
-  content: "";
-  display: block;
-  flex: 0 0 220px;           /* 与 .item 同宽 */
-  height: 0;
-}
-
-.item:hover { transform: translateY(-6px); }
-
-.item .photo img {
+/* 确保图片不溢出 */
+.gallery-page .item .photo img{
   width: 100%;
   height: auto;
   display: block;
@@ -142,9 +137,18 @@ body.gallery-page::before {
   border-radius: 10px;
 }
 
+/* 关键：若最后一行有 2 个且总数为奇数（例如 5 个），把倒数第 2 个挪到第 2 列，实现“2 张居中” */
+.gallery-page .gallery-grid > .item:nth-last-child(2):nth-child(odd) {
+  grid-column: 2;   /* 放在中间那列 */
+}
+
 /* 移动端两列 */
-@media (max-width: 640px) {
-  .item { width: 44vw; max-width: 196px; }
+@media (max-width: 640px){
+  .gallery-page .gallery-grid{
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
+    gap: 28px 24px;
+  }
+  .gallery-page .item{ width: 100%; max-width: 196px; margin-inline: auto; }
 }
 
 /* Modal 弹窗 */
